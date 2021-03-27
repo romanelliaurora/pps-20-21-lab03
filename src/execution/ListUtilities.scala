@@ -4,11 +4,10 @@ import u03.Lists.List
 import u03.Lists.List._
 import u02.Optionals.Option._
 import u02.Optionals.Option
-
-
+import u02.SumTypes._
 import scala.annotation.tailrec
 
-object ListUtilitis {
+object ListUtilities {
 
   @tailrec
   def drop(lst: List[Int], i: Int): List[Int] = lst match {
@@ -39,4 +38,15 @@ object ListUtilitis {
     _max(l, Integer.MIN_VALUE)
 
   }
+  def getCourses(l: List[Person]): List[String] = flatMapL[Person, String](l) {
+    case Teacher(_, c) => Cons(c, Nil())
+    case _ => Nil()
+  }
+
+/*
+  def getCourses2[A](l: List[Person]):List[A] = l match {
+    case Cons(Teacher(_,c), t)  => Cons ( c , getCourses2(t))
+    case _ => Nil()
+  }
+*/
 }

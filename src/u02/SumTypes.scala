@@ -12,6 +12,10 @@ object SumTypes extends App {
     case Teacher(n,_) => n
   }
 
+  /**
+   * ciao ciao sono io, sera
+   */
+
   println(name(Student("mario",2015)))
 
   // A LinkedList of Int
