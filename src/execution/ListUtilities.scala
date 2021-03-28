@@ -10,7 +10,7 @@ import scala.annotation.tailrec
 object ListUtilities {
 
   @tailrec
-  def drop(lst: List[Int], i: Int): List[Int] = lst match {
+  def drop[A](lst: List[A], i: Int): List[A] = lst match {
     case Cons(_, t) if i > 0 => drop(t, i - 1)
     case _ => lst
   }
@@ -43,10 +43,19 @@ object ListUtilities {
     case _ => Nil()
   }
 
-/*
-  def getCourses2[A](l: List[Person]):List[A] = l match {
-    case Cons(Teacher(_,c), t)  => Cons ( c , getCourses2(t))
-    case _ => Nil()
+  @tailrec
+  def foldLeft(l: List[Int])(acc: Int)(f: (Int, Int) => Int): Int = l match {
+    case Cons(h, t) => foldLeft(t)(f(acc, h))(f)
+    case Nil() => acc
   }
-*/
+
+  def reverse(l: List[Int]): List[Int] = l match {
+    case Cons(h, t) => append(reverse(t),Cons(h, Nil()))
+    case Nil() => Nil()
+  }
+
+  //def reverseInput(f: (Int, Int) => Int) : ((Int, Int) => Int) = (x: Int, y: Int) => f(y,x)
+
+  def foldRight(l: List[Int])(acc: Int)(f: (Int, Int) => Int): Int = foldLeft(reverse(l))(acc)( (x: Int,y : Int)=>f(y,x))
+
 }

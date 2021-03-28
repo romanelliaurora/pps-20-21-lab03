@@ -60,4 +60,13 @@ class ListUtilitiesTest {
   }
 
 
+
+  @Test def testFold() {
+    assertEquals(-16, foldLeft(Cons (3 , Cons (7 , Cons (1 , Cons (5 , Nil () ) ) ) ))(0) (_-_ ))
+    assertEquals((Cons (5 , Cons (1 , Cons (7 , Cons (3 , Nil () )))) ), reverse(Cons (3 , Cons (7 , Cons (1 , Cons (5 , Nil () ) ) ) )))
+    assertEquals(-8, foldRight(Cons (3 , Cons (7 , Cons (1 , Cons (5 , Nil () ) ) ) ))(0) (_ - _ ))
+  }
+
+
+
 }
