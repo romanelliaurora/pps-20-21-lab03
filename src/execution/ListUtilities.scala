@@ -44,18 +44,18 @@ object ListUtilities {
   }
 
   @tailrec
-  def foldLeft(l: List[Int])(acc: Int)(f: (Int, Int) => Int): Int = l match {
+  def foldLeft[A,B](l: List[A])(acc: B)(f: (B, A) => B): B = l match {
     case Cons(h, t) => foldLeft(t)(f(acc, h))(f)
     case Nil() => acc
   }
 
-  def reverse(l: List[Int]): List[Int] = l match {
+  def reverse[A](l: List[A]): List[A] = l match {
     case Cons(h, t) => append(reverse(t),Cons(h, Nil()))
     case Nil() => Nil()
   }
 
   //def reverseInput(f: (Int, Int) => Int) : ((Int, Int) => Int) = (x: Int, y: Int) => f(y,x)
 
-  def foldRight(l: List[Int])(acc: Int)(f: (Int, Int) => Int): Int = foldLeft(reverse(l))(acc)( (x: Int,y : Int)=>f(y,x))
+  def foldRight[A,B](l: List[A])(acc: B)(f: (A, B) => B): B = foldLeft(reverse(l))(acc)( (x: B,y :A)=>f(y,x))
 
 }
